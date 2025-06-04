@@ -27,14 +27,19 @@
 #
 
 
-for link in $(find ccc -type l ! -exec test -e {} \;); do
-    target_name=$(basename "$(readlink "$link")")
+katalogzrodlo="ccc"
 
-    for dir in aaa bbb; do
-        if [ -e "$dir/$target_name" ]; then
-            # Obliczamy ścieżkę względną z ccc/ do katalogu źródłowego
-            echo "$(basename "$link"):../$dir/$target_name"
-            break
+for f in "$katalogzrodlo"/*; do   # iteracja po wszystkich plikach w katalogu źródłowym
+    if [ -L "$f" ] && [ ! -e "$f" ]; then  # jeśli plik jest dowiązaniem symbolicznym i plik nie istnieje
+        sciezka=$(readlink "$f")  # odczytanie ścieżki dowiązania
+        nazwa=$(basename "$sciezka")  # pobranie nazwy pliku z dowiązania
+
+        # Sprawdzenie w katalogach aaa i bbb
+        if [ -e "aaa/$nazwa" ]; then
+            echo "$f:../aaa/$nazwa"
         fi
-    done
+        if [ -e "bbb/$nazwa" ]; then
+            echo "$f:../bbb/$nazwa"
+        fi
+    fi
 done

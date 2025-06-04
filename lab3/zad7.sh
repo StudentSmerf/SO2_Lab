@@ -26,12 +26,16 @@
 #
 
 
-find bbb -type l | while read link; do
-    target=$(readlink "$link")
-    case "$target" in
-        /*)
-            # Ścieżka bezwzględna — przekształć na kanoniczną
-            realpath -m "$target"
-            ;;
-    esac
-done > ddd/linki
+katalogzrodlo="bbb"
+
+for f in "$katalogzrodlo"/*; do   # iteracja po wszystkich plikach w katalogu źródłowym
+    if [ -L "$f" ]; then  # jeśli plik jest dowiązaniem symbolicznym
+        sciezka=$(readlink "$f")  # odczytanie sciezki dowiązania
+        if [ "${sciezka:0:1}" != "/" ]; then  # jeśli ścieżka jest względna
+            sciezka=$(realpath "$f")  # konwersja na ścieżkę kanoniczną
+        fi
+        #zapisanie ścieżki do pliku 'linki' w katalogu 'ddd'
+        echo "$sciezka" >> "ddd/linki"  # dodanie ścieżki do pliku 'linki'
+    
+    fi
+done

@@ -26,32 +26,17 @@
 
 
 # Lista katalogów do powiązania
-katalogi=("aaa" "bbb" "ccc")
+
 katalog_docelowy="ddd"
 
-# Upewniamy się, że katalog docelowy istnieje
-if [ ! -d "$katalog_docelowy" ]; then
-    echo "Błąd: katalog docelowy '$katalog_docelowy' nie istnieje."
-    exit 1
+#Sprawdzenie czy dowiązania już istnieją
+if [ ! -d "$katalog_docelowy/aaa" ]; then
+    ln -s "aaa" "$katalog_docelowy/aaa"  # Tworzenie dowiązania do katalogu aaa
 fi
-
-for kat in "${katalogi[@]}"; do
-    if [ -d "$kat" ]; then
-        cel="$katalog_docelowy/$kat"
-
-        if [ -e "$cel" ]; then
-            echo "Dowiązanie/katalog '$cel' już istnieje – pomijam."
-        else
-            ln -s "../$kat" "$cel"
-            if [ $? -eq 0 ]; then
-                echo "Utworzono dowiązanie: $cel -> ../$kat"
-            else
-                echo "Błąd podczas tworzenia dowiązania do: $kat"
-            fi
-        fi
-    else
-        echo "Źródłowy katalog '$kat' nie istnieje – pomijam."
-    fi
-done
-
+if [ ! -d "$katalog_docelowy/bbb" ]; then
+    ln -s "bbb" "$katalog_docelowy/bbb"  # Tworzenie dowiązania do katalogu bbb
+fi
+if [ ! -d "$katalog_docelowy/ccc" ]; then
+    ln -s "ccc" "$katalog_docelowy/ccc"  # Tworzenie dowiązania do katalogu ccc
+fi
 

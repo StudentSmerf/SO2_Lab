@@ -24,5 +24,11 @@
 # Nie wyświetlać nic ponadto!
 #
 
-find ccc -type l ! -exec test -e {} \; -exec readlink {} \;
+katalogzrodlo="ccc"
+
+for f in "$katalogzrodlo"/*; do   # iteracja po wszystkich plikach w katalogu źródłowym
+    if [ -L "$f" ] && [ ! -e "$f" ]; then  # jeśli plik jest dowiązaniem symbolicznym i nie istnieje
+        echo "$f"  # wyświetlenie ścieżki do wiszącego dowiązania
+    fi
+done
 

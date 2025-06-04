@@ -23,19 +23,13 @@
 # jeśli jakikolwiek plik o nazwie `pierwszy` już istnieje w `ddd`.
 #
 
-zrodlo="aaa/podstawa"
-cel="ddd/pierwszy"
+plikzrodlo="aaa/podstawa"
+plikdowiazania="ddd/drugi"
 
-# Sprawdzenie, czy plik docelowy już istnieje
-if [ -e "$cel" ]; then
-    echo "Plik '$cel' już istnieje. Dowiązanie nie zostało utworzone."
+if [ -f "$plikdowiazania" ]; then # Sprawdzenie, czy plik dowiązania już istnieje
+    echo "Plik istnieje"
 else
-    # Próba utworzenia dowiązania twardego
-    if ln "$zrodlo" "$cel"; then
-        echo "Dowiązanie twarde '$cel' do '$zrodlo' zostało utworzone."
-    else
-        echo "Błąd: Nie udało się utworzyć dowiązania."
-    fi
+    ln "$plikzrodlo" "$plikdowiazania"   # Tworzenie dowiązania twardego
 fi
 
 

@@ -25,4 +25,15 @@
 #
 
 
-find ccc -type l -exec test -e {} \; -exec readlink -f {} \; | sed "s|^${HOME}/|~/|"
+katalogzrodlo="ccc"
+
+for f in "$katalogzrodlo"/*; do   # iteracja po wszystkich plikach w katalogu źródłowym
+    if [ -L "$f" ] && [ -e "$f" ]; then  # jeśli plik jest dowiązaniem symbolicznym i istnieje
+        sciezka=$(readlink "$f")  # odczytanie sciezki dowiązania
+        if [ "${sciezka:0:1}" != "/" ]; then  # jeśli ścieżka jest względna
+            sciezka="${HOME}/$sciezka"  # konwersja na bezwzględną ścieżkę względem katalogu domowego
+        fi
+        echo "$sciezka"  # wyświetlenie ścieżki do wskazywanego miejsca
+    
+    fi
+done

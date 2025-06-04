@@ -29,31 +29,15 @@
 #
 
 
-if [ "$#" -ne 2 ]; then
+if [ ! "$#" -eq 2 ]; then
     exit 1
 fi
 
 katalog="$1"
 plik="$2"
 
-# Sprawdzenie, czy katalog istnieje i jest katalogiem
-if [ ! -d "$katalog" ]; then
+if [ ! -d "$katalog" ] || [ ! -e "$plik" ]; then
     exit 1
 fi
-
-# Sprawdzenie, czy plik istnieje i jest plikiem zwykłym
-if [ ! -f "$plik" ]; then
-    exit 1
-fi
-
-# Pobranie inode i urządzenia pliku docelowego
-inode_docelowego=$(stat -c %i "$plik")
-device_docelowego=$(stat -c %d "$plik")
-
-# Szukanie w katalogu (bez rekurencji) plików o tym samym inode i device
-find "$katalog" -maxdepth 1 -type f -inum "$inode_docelowego" -exec stat -c '%d %n' {} \; | while read dev nazwa; do
-    if [ "$dev" = "$device_docelowego" ]; then
-        basename "$nazwa"
-    fi
-done
+find "$katalog" -maxdepth 1 -samefile "$plik" -exec basename {} \;
 

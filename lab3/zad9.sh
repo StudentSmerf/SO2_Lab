@@ -29,15 +29,9 @@
 #
 
 
-if [ "$#" -ne 1 ]; then
+#Sprawdzenie podanych argumentów
+if [ ! "$#" -eq 1 ]; then
     exit 1
 fi
 
-cel="$1"
-
-find ccc -type l | while read link; do
-    if [ "$(readlink "$link")" = "$cel" ]; then
-        basename "$link"
-    fi
-done
-
+find ccc/ -lname "$1"

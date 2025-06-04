@@ -25,33 +25,16 @@
 #
 
 
-src_dir="aaa"
-dest_dir="ddd"
+katalogzrodlo="aaa"
+katalogdocelowy="ddd"
 
-# Upewniamy się, że katalog źródłowy i docelowy istnieją
-if [ ! -d "$src_dir" ]; then
-    echo "Błąd: katalog '$src_dir' nie istnieje."
-    exit 1
-fi
 
-if [ ! -d "$dest_dir" ]; then
-    echo "Błąd: katalog '$dest_dir' nie istnieje."
-    exit 1
-fi
 
-# Iteracja po plikach wykonywalnych w katalogu aaa
-find "$src_dir" -maxdepth 1 -type f -executable | while read plik; do
-    nazwa=$(basename "$plik")
-    cel="$dest_dir/$nazwa"
-
-    if [ -e "$cel" ]; then
-        echo "Pomijam: '$cel' już istnieje."
-    else
-        ln -s "../$plik" "$cel"
-        if [ $? -eq 0 ]; then
-            echo "Utworzono dowiązanie: $cel -> ../$plik"
-        else
-            echo "Błąd podczas tworzenia dowiązania dla: $plik"
+for f in "$katalogzrodlo"/*; do   # iteracja po wszystkich plikach w katalogu źródłowym
+    if [ -x "$f" ] ; then  # jeśli plik jest wykonywalny
+        plik = "$(basename "$f")"  # pobranie nazwy pliku bez ścieżki
+        if [ ! -e "$katalogdocelowy/$plik" ]; then  # sprawdzenie, czy plik docelowy nie istnieje
+            ln -s "$f" "$katalogdocelowy/$plik"  # tworzenie dowiązania symbolicznego
         fi
     fi
 done

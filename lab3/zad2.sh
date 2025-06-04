@@ -25,20 +25,11 @@
 #
 
 
-katalog_docelowy="ddd"
-plik_docelowy="drugi"
-plik_zrodlowy="../aaa/podstawa"  # Ścieżka względna z ddd do aaa/podstawa
-pelna_sciezka_docelowa="$katalog_docelowy/$plik_docelowy"
+plikzrodlo="aaa/podstawa"
+plikdowiazania="ddd/drugi"
 
-# Sprawdzenie, czy plik już istnieje
-if [ -e "$pelna_sciezka_docelowa" ]; then
-    echo "Plik '$pelna_sciezka_docelowa' już istnieje. Dowiązanie nie zostało utworzone."
+if [ -f "$plikdowiazania" ]; then # Sprawdzenie, czy plik dowiązania już istnieje
+    echo "Plik istnieje"
 else
-    # Tworzenie dowiązania symbolicznego
-    ln -s "$plik_zrodlowy" "$pelna_sciezka_docelowa"
-    if [ $? -eq 0 ]; then
-        echo "Dowiązanie symboliczne '$pelna_sciezka_docelowa' do '$plik_zrodlowy' zostało utworzone."
-    else
-        echo "Błąd: Nie udało się utworzyć dowiązania symbolicznego."
-    fi
+    ln -s "$plikzrodlo" "$plikdowiazania"  # Tworzenie dowiązania symbolicznego
 fi
