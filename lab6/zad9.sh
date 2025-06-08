@@ -26,4 +26,16 @@
 # – proszę zwrócić uwagę, że niektóre słowa zawierają je na końcu i odpowiednio
 # uwzględnić taką sytuację.
 #
-
+#gsub zamienia przecinki i kropki na pusty ciąg znaków
+awk '{
+  for(i=1;i<=NF;i++){
+    gsub(\,\,"",$i)
+    gsub(\.\,"",$i)
+    len=length($i)
+    if(len>0)
+      count[len]++
+  }
+} END{
+  for(i in count)
+    print i, count[i]
+}' dodatkowe/nowomowa.txt

@@ -26,4 +26,17 @@
 # liczbę znaków w każdej linii jak to możliwe). Jako wynik programu wyświetlić
 # tekst po przekształceniu.
 #
-
+#jeśli linia ma mniej niż 80 znaków, to ją drukujemy
+#jeśli ma więcej, to drukujemy pierwsze 80 znaków, a resztę zostawiamy do przetworzenia
+awk '{
+  for(i=1;i<=NF;i++){
+    if(length($0)<=80){
+      print $0
+      break
+    }
+    line=substr($0,1,80)
+    print line
+    $0=substr($0,81)
+    i=0
+  }
+}' dodatkowe/lipsum.txt

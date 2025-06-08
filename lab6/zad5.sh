@@ -26,4 +26,6 @@
 # Uwaga! Proszę pamiętać o uwzględnieniu znaków końca linii w obliczeniach
 # dotyczących liczby znaków!
 #
-
+#length $0 - cała linia, +1 - znak końca linii
+#NF - liczba pól w linii, czyli liczba słów
+awk '{chars+=length($0)+1; words+=NF; lines++} END{print chars; print words; print lines}' dodatkowe/nowomowa.txt

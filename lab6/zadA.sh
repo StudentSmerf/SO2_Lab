@@ -24,15 +24,14 @@
 # `dodatkowe/doc-tajemnic.txt` (źródło: http://tinyurl.com/doc-tajemnic).
 #
 # Proszę oszacować objętość zadań zgłoszonych dla każdego prowadzącego,
-# rozmianą jako liczbę istotnych znaków (dla uproszczenia pomijamy znaki
+# rozumianą jako liczbę istotnych znaków (dla uproszczenia pomijamy znaki
 # nowych linii) w wierszach pomiędzy wpisami określajacymi prowadzących.
 # Przyjmujemy, że określenie prowadzącego następuje po znaku dwukropka
 # w linii zawierającej frazę "Prowadzący:" oraz nie zastanawiamy się nad
-# sensem tych określeć – czyli wpisy "Jarosław Rudy" i "Doktor Jarosław Rudy"
+# sensem tych określeń – czyli wpisy "Jarosław Rudy" i "Doktor Jarosław Rudy"
 # traktujemy jako dwie różne osoby. Jako wynik działania programu proszę
 # zwrócić liczby znaków i nazwy prowadzących – każda taka para w osobnej linii.
 #
 # Uwaga! Jeden prowadzący ma dodatkową spację na końcu linii określającej go
 # i według przyjętej reguły – traktujemy ten wpis jak osobną osobę!
 #
-

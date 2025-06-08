@@ -29,3 +29,4 @@
 # pliku ze strony: https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html
 #
 
+awk -F, 'NR>1{sum=0; for(i=4;i<=7;i++) sum+=$i; avg=(sum+2*$8)/6; printf "%11s %2.4f\n", $3, avg}' dodatkowe/grades.csv

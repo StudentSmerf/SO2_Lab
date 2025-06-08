@@ -25,3 +25,4 @@
 # rozmiar w Bajtach. Jako wynik zwrócić liczbę w MebiBajtach.
 #
 
+find coreutils-8.32 -printf '%s\n' | awk '{total+=$1} END{print total/1024/1024}'

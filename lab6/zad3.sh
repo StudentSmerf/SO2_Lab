@@ -27,6 +27,6 @@
 # Plik do przetworzenia to `dodatkowe/cities.csv`, zmodyfikowana wersja
 # pliku ze strony: https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html
 #
-#zapisanie liczby pól do zmiennej 'pola', sprawdzenie, czy liczba pól jest taka sama jak w pierwszej linii
-awk -F, 'NR==1{pola=$1; next} NF!=pola{print NR}' dodatkowe/cities.csv
+#zapisanie liczby pól z pierwszej linii do zmiennej 'pola', sprawdzenie czy liczba pól jest taka sama 
+awk -F, 'NR==1{pola=NF; next} NF!=pola{print NR}' dodatkowe/cities.csv
 # NR to numer linii, NF to liczba pól w linii
