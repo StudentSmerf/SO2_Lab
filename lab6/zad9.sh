@@ -29,8 +29,7 @@
 #gsub zamienia przecinki i kropki na pusty ciąg znaków
 awk '{
   for(i=1;i<=NF;i++){
-    gsub(\,\,"",$i)
-    gsub(\.\,"",$i)
+    gsub(/[,.]/,"",$i)
     len=length($i)
     if(len>0)
       count[len]++

@@ -26,3 +26,4 @@
 # Jako wynik zwrócić same unikalne ścieżki, każdą w nowej linii.
 #
 
+awk '/\\includegraphics/{match($0, /{([^}]*)}/, a); print a[1]}' dodatkowe/slajdy.tex | sort -u 

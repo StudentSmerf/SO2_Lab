@@ -21,4 +21,5 @@
 # aż do najbliższego znaku >. Jako wynik zwrócić pozostałą zawartość,
 # pomijajac linie puste i takie, których jedyną zawartość stanowią spacje.
 #
-
+#[^...] - negacja, czyli wszystko, co nie jest w nawiasach - [^<] - wszystko, co nie jest <
+awk '{ gsub(/<[^>]*>/,"",$0); if ($0 !~ /^[[:space:]]*$/) {if ($0 !~ /^$/) print $0} }' dodatkowe/cpplint.txt

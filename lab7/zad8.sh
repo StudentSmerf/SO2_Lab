@@ -20,4 +20,3 @@
 # zawartość, ale podmieniając w locie zapisane tam wartości temperatur ze skali
 # Celsjusza na Fehrenheita: T[°F] = T[°C] * 9/5 + 32.
 #
-

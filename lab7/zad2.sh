@@ -24,3 +24,4 @@
 # Każdy znaleziony unikalny odnośnik wypisać w nowej linii.
 #
 
+awk '{ for (i=1; i<=NF; i++) if ($i ~ /^[a-zA-Z]+:\/\//) print $i} }' dodatkowe/slajdy.txt | sort -u

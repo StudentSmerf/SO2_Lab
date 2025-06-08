@@ -23,3 +23,8 @@
 # także wyodrębnić.
 #
 
+#adresy email
+awk '/match($0, /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/, a) ; print a[1]' dodatkowe/kant.txt
+
+#numery telefonów
+awk '/match($0, \+?[0-9]{1,2}[0-9\s-]{4,}[0-9\s-]{4,}[0-9]{3,}/, a) ; print a[1]' dodatkowe/kant.txt

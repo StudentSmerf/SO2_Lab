@@ -22,3 +22,4 @@
 # Wynik wyświetlić jako ułamek w postaci X/Y.
 #
 
+awk '{ total++; if ($0 !~ /^[[:space:]]*$/) {if ($0 !~ /^$/) non_empty++ }} END { print non_empty "/" total }' dodatkowe/slajdy.tex
